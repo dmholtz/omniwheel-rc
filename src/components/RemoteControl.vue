@@ -16,6 +16,9 @@
         <v-col cols="auto">
           <DiscreteJoystick/>
         </v-col>
+        <v-col cols="auto">
+          <TouchJoystick @joystick-move="handleJoystick"/>
+        </v-col>
       </v-row>
     </v-responsive>
   </v-container>
@@ -24,6 +27,7 @@
 <script setup>
 import { onMounted, ref } from 'vue';
 import DiscreteJoystick from './DiscreteJoystick.vue';
+import TouchJoystick from './TouchJoystick.vue';
 
 const connection = ref()
 
@@ -43,6 +47,14 @@ onMounted(() => {
     console.log(event);
   }
 })
+
+function handleJoystick(joystickEvent) {
+  if (joystickEvent.x == 0 && joystickEvent.y == 0) {
+    connection.value.send("S")
+  } else {
+    connection.value.send(JSON.stringify(joystickEvent))
+  }
+}
 
 function forward() {
   console.log("Hi")
