@@ -1,44 +1,31 @@
-# default
+# omniwheel-rc
 
-## Project setup
+A remote control with Joysticks for omniwheel vehicles built with Vue.js.
 
-```
-# yarn
-yarn
+## Setup
 
-# npm
+### Installation
+
+```bash
 npm install
-
-# pnpm
-pnpm install
 ```
 
 ### Compiles and hot-reloads for development
 
-```
-# yarn
-yarn dev
+Localhost:
 
-# npm
+```bash
 npm run dev
+```
 
-# pnpm
-pnpm dev
+Network:
+
+```bash
+npm run dev -- --host
 ```
 
 ### Compiles and minifies for production
 
-```
-# yarn
-yarn build
-
-# npm
+```bash
 npm run build
-
-# pnpm
-pnpm build
 ```
-
-### Customize configuration
-
-See [Configuration Reference](https://vitejs.dev/config/).
