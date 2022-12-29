@@ -7,9 +7,9 @@
             @mouseup="handleMouseup"
             @mousemove="handleMousemove"
             @mouseleave="handleMouseup"
-            @touchstart="touchStart"
-            @touchend="touchEnd"
-            @touchmove="touchMove" 
+            @touchstart="handleTouchStart"
+            @touchend="handleTouchEnd"
+            @touchmove="handleTouchMove" 
             :cx="4+joystickXDisplacement" :cy="4-joystickYDisplacement" r="2" fill="#CE1126"/>
   </svg>
   <div>{{ Math.round(joystickXDisplacement*100)/100 }} : {{ Math.round(joystickYDisplacement*100)/100 }}</div>
@@ -38,14 +38,12 @@ const joystickYDisplacement = ref(0)
 const maxDisplacementRadius = 1
 
 function handleMousedown(mouseEvent) {
-  console.log("Touch Joystick")
   isClicked.value = true
   mouseXPos.value = mouseEvent.offsetX
   mouseYPos.value = mouseEvent.offsetY
 }
 
 function handleMouseup() {
-  console.log("Release Joystick")
   isClicked.value = false
   updateJoystickDisplacement(0,0)
 }
@@ -54,43 +52,26 @@ function handleMousemove(mouseEvent) {
   if (isClicked.value) {
     const deltaX = mouseEvent.offsetX - mouseXPos.value;
     const deltaY = mouseEvent.offsetY - mouseYPos.value;
-    updateJoystickDisplacement(deltaX/15, deltaY/15)
+    // TODO optimize joystick displacement scaling
+    updateJoystickDisplacement(deltaX/15, -deltaY/15)
   }
 }
 
 
-function touchStart(touchEvent) {
+function handleTouchStart(touchEvent) {
   touchXPos.value = touchEvent.touches[0].screenX
   touchYPos.value = touchEvent.touches[0].screenY
-
-  touchState.value = "touchstart"
 }
 
-function touchMove(touchEvent) {
+function handleTouchMove(touchEvent) {
   const deltaX = touchEvent.touches[0].screenX - touchXPos.value
   const deltaY = touchEvent.touches[0].screenY - touchYPos.value
-
+  // TODO optimize joystick displacement scaling
   updateJoystickDisplacement(deltaX/50, -deltaY/50);
-  //joystickXPos.value = saturation(deltaX/50 + 5, 3, 7)
-  //joystickYPos.value = saturation(deltaY/50 + 5, 3, 7)
-
-  //touchState.value = "move"
 }
 
-function touchEnd(touchEvent) {
-  //touchState.value = "end"
+function handleTouchEnd(touchEvent) {
   updateJoystickDisplacement(0, 0)
-}
-
-function saturation(val, minVal, maxVal) {
-  if (val < minVal) {
-    return minVal;
-  } else if (val > maxVal) {
-    return maxVal;
-  }
-  else {
-    return val;
-  }
 }
 
 function updateJoystickDisplacement(xDisplacement, yDisplacement) {
