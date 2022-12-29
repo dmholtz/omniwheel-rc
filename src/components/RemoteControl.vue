@@ -3,7 +3,7 @@
 
     <v-responsive class="d-flex align-center text-center fill-height">
 
-      <div class="text-body-2 font-weight-light mb-n1">Welcome to</div>
+      <div class="text-body-2 font-weight-light mb-n1">TXT 4.0</div>
 
       <h1 class="text-h2 font-weight-bold">Omniwheel Controller</h1>
 
