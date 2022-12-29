@@ -1,5 +1,5 @@
 <template>
-  <h2>Joystick</h2>
+  <div>{{description}}</div>
   <svg class="joystick" viewBox="0 0 8 8" width="60%">
     <circle class="joystick" cx="4" cy="4" r="3.5" fill="#00247D"/>
     <circle class="joystick"
@@ -23,6 +23,7 @@
 import { ref } from 'vue';
 
 const emit = defineEmits(['joystick-move'])
+const props = defineProps(['description'])
 
 // mouse state
 const isClicked = ref(false)

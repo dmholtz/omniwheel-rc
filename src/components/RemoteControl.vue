@@ -12,11 +12,15 @@
       <v-row class="d-flex align-center justify-center">
         <v-col cols="auto">
           <DiscreteJoystick v-if="false"/>
-          <TouchJoystick v-else @joystick-move="handleTranslatoryJoystick"/>
+          <TouchJoystick v-else 
+            description="translatory"
+            @joystick-move="handleTranslatoryJoystick"/>
         </v-col>
         <v-col cols="auto">
           <DiscreteJoystick v-if="false"/>
-          <TouchJoystick v-else @joystick-move="handleRotatoryJoystick"/>
+          <TouchJoystick v-else
+            description="rotatory"
+            @joystick-move="handleRotatoryJoystick"/>
         </v-col>
       </v-row>
     </v-responsive>
