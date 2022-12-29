@@ -6,7 +6,6 @@
             @mousedown="handleMousedown" 
             @mouseup="handleMouseup"
             @mousemove="handleMousemove"
-            @mouseleave="handleMouseup"
             @touchstart="handleTouchStart"
             @touchend="handleTouchEnd"
             @touchmove="handleTouchMove" 
@@ -46,11 +45,15 @@ function handleMousedown(mouseEvent) {
   isClicked.value = true
   mouseXPos.value = mouseEvent.offsetX
   mouseYPos.value = mouseEvent.offsetY
+  // add a global event listener to handle mouseup
+  document.addEventListener('mouseup',handleMouseup)
 }
 
 function handleMouseup() {
   isClicked.value = false
   updateJoystickDisplacement(0,0)
+  // de-register global mouseup event listener
+  document.removeEventListener('mouseup',handleMouseup);
 }
 
 function handleMousemove(mouseEvent) {
