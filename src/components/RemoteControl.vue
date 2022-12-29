@@ -7,17 +7,16 @@
 
       <h1 class="text-h2 font-weight-bold">Omniwheel Controller</h1>
 
-      <div class="py-7"/>
+      <div class="py-2"/>
       
       <v-row class="d-flex align-center justify-center">
         <v-col cols="auto">
-          <DiscreteJoystick/>
+          <DiscreteJoystick v-if="false"/>
+          <TouchJoystick v-else @joystick-move="handleTranslatoryJoystick"/>
         </v-col>
         <v-col cols="auto">
-          <DiscreteJoystick/>
-        </v-col>
-        <v-col cols="auto">
-          <TouchJoystick @joystick-move="handleJoystick"/>
+          <DiscreteJoystick v-if="false"/>
+          <TouchJoystick v-else @joystick-move="handleRotatoryJoystick"/>
         </v-col>
       </v-row>
     </v-responsive>
@@ -48,10 +47,20 @@ onMounted(() => {
   }
 })
 
-function handleJoystick(joystickEvent) {
+function handleTranslatoryJoystick(joystickEvent) {
   if (joystickEvent.x == 0 && joystickEvent.y == 0) {
     connection.value.send("S")
   } else {
+    joystickEvent.motion = "translatory"
+    connection.value.send(JSON.stringify(joystickEvent))
+  }
+}
+
+function handleRotatoryJoystick(joystickEvent) {
+  if (joystickEvent.x == 0 && joystickEvent.y == 0) {
+    connection.value.send("S")
+  } else {
+    joystickEvent.motion = "rotatory"
     connection.value.send(JSON.stringify(joystickEvent))
   }
 }

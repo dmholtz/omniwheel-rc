@@ -1,26 +1,18 @@
 <template>
-  <v-container class="fill-height">
-
-    <v-responsive class="d-flex align-center text-center fill-height">
-
-      <h1 class="joystick">Heading</h1>
-
-      <svg class="joystick" viewBox="0 0 8 8" width="100%">
-        <circle class="joystick" cx="4" cy="4" r="3.5" fill="#00247D"/>
-        <circle class="joystick"
-                @mousedown="handleMousedown" 
-                @mouseup="handleMouseup"
-                @mousemove="handleMousemove"
-                @mouseleave="handleMouseup"
-                @touchstart="touchStart"
-                @touchend="touchEnd"
-                @touchmove="touchMove" 
-                :cx="4+joystickXDisplacement" :cy="4-joystickYDisplacement" r="2" fill="#CE1126"/>
-      </svg>
-      <div>{{ Math.round(joystickXDisplacement*100)/100 }} : {{ Math.round(joystickYDisplacement*100)/100 }}</div>
-
-    </v-responsive>
-  </v-container>
+  <h1>Joystick</h1>
+  <svg class="joystick" viewBox="0 0 8 8" width="60%">
+    <circle class="joystick" cx="4" cy="4" r="3.5" fill="#00247D"/>
+    <circle class="joystick"
+            @mousedown="handleMousedown" 
+            @mouseup="handleMouseup"
+            @mousemove="handleMousemove"
+            @mouseleave="handleMouseup"
+            @touchstart="touchStart"
+            @touchend="touchEnd"
+            @touchmove="touchMove" 
+            :cx="4+joystickXDisplacement" :cy="4-joystickYDisplacement" r="2" fill="#CE1126"/>
+  </svg>
+  <div>{{ Math.round(joystickXDisplacement*100)/100 }} : {{ Math.round(joystickYDisplacement*100)/100 }}</div>
 </template>
 
 <script setup>
