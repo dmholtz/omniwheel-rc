@@ -2,6 +2,8 @@
 
 A remote control with Joysticks for omniwheel vehicles built with Vue.js.
 
+![Screenshot](img/screenshot_mobile.jpg)
+
 ## Setup
 
 ### Installation
